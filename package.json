@@ -1,6 +1,6 @@
 {
   "name": "printgo",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Local printer MCP tools with stdio, HTTP, and optional Cloudflare hosting",
   "mcpName": "io.github.Nishkalkashyap/printgo",
   "repository": {
