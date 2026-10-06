@@ -1,0 +1,63 @@
+{
+  "name": "printgo",
+  "version": "0.1.0",
+  "description": "Local printer MCP tools with stdio, HTTP, and optional Cloudflare hosting",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "bin": {
+    "printgo": "dist/cli.js",
+    "printgo-mcp": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./hosting": {
+      "types": "./dist/hosting.d.ts",
+      "import": "./dist/hosting.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "smoke:tunnel": "npm run build && node scripts/smoke-tunnel.mjs",
+    "test": "npm run build && node --import tsx --test tests/*.test.ts",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/client": "^2.3.1",
+    "@modelcontextprotocol/node": "^2.1.1",
+    "@modelcontextprotocol/server": "^2.3.1",
+    "@pdf-lib/fontkit": "^1.1.1",
+    "@puppeteer/browsers": "^3.2.3",
+    "image-size": "^2.0.4",
+    "ipaddr.js": "^2.5.0",
+    "marked": "^18.1.0",
+    "parse5": "^8.0.1",
+    "pdf-lib": "^1.17.1",
+    "puppeteer-core": "^25.12.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "keywords": [
+    "mcp",
+    "printer",
+    "printing",
+    "cloudflare",
+    "sdk"
+  ]
+}

@@ -1,0 +1,28 @@
+name: CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [22, 24]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Install Chromium for rendering tests
+        run: >-
+          node --input-type=module -e 'import {installBrowser} from "./dist/index.js";
+          import {appendFileSync} from "node:fs";
+          const browser = await installBrowser({stateDir: process.env.RUNNER_TEMP + "/printgo-browser"});
+          appendFileSync(process.env.GITHUB_ENV, "PRINTGO_CHROME_PATH=" + browser.executablePath + "\nREQUIRE_CHROMIUM_TESTS=1\n");'
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm pack --dry-run
