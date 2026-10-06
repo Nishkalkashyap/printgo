@@ -33,7 +33,7 @@ export class PrinterClient {
         requestInit: { headers: { Authorization: `Bearer ${options.password}` }, redirect: 'error' },
       });
     }
-    const client = new Client({ name: 'printgo-sdk', version: '0.1.0' }, {
+    const client = new Client({ name: 'printgo-sdk', version: '0.1.1' }, {
       versionNegotiation: { mode: 'auto' },
     });
     try { await client.connect(transport); }

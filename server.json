@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Nishkalkashyap/printgo",
+  "title": "PrintGo",
+  "description": "Print PDFs, images, text, Markdown and HTML to your local printers, and track or cancel the jobs.",
+  "repository": {
+    "url": "https://github.com/Nishkalkashyap/printgo",
+    "source": "github"
+  },
+  "version": "0.1.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "printgo",
+      "version": "0.1.1",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "stdio"
+        }
+      ]
+    }
+  ]
+}
