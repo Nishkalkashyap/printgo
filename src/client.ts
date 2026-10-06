@@ -1,5 +1,6 @@
 import { Client, StreamableHTTPClientTransport, type Transport } from '@modelcontextprotocol/client';
 import { PrintGoError } from './errors.js';
+import { version } from './version.js';
 import { printRequestSchema, markupPrintRequestSchema } from './printing.js';
 import type { Printer, PrinterCapabilities, PrinterStatus, PrintJob, PrintRequest, MarkupPrintRequest } from './types.js';
 
@@ -33,7 +34,7 @@ export class PrinterClient {
         requestInit: { headers: { Authorization: `Bearer ${options.password}` }, redirect: 'error' },
       });
     }
-    const client = new Client({ name: 'printgo-sdk', version: '0.1.1' }, {
+    const client = new Client({ name: 'printgo-sdk', version }, {
       versionNegotiation: { mode: 'auto' },
     });
     try { await client.connect(transport); }

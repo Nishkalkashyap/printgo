@@ -5,6 +5,7 @@ for (const file of ['NotoSans-Regular.ttf', 'OFL.txt', 'README.md']) {
   await copyFile(`src/fonts/${file}`, `dist/fonts/${file}`);
 }
 const font = await readFile('src/fonts/NotoSans-Regular.ttf');
+const { version } = JSON.parse(await readFile('package.json', 'utf8'));
 const plugins = [{
   name: 'embed-print-runtime',
   setup(builder) {
@@ -13,6 +14,9 @@ const plugins = [{
     }));
     builder.onLoad({ filter: /[/\\]markup-worker-location\.ts$/ }, () => ({
       contents: "import {join} from 'node:path'; export const packagedMarkupWorker = join(__dirname, 'markup-worker.cjs');", loader: 'js',
+    }));
+    builder.onLoad({ filter: /[/\\]version\.ts$/ }, () => ({
+      contents: `export const version = ${JSON.stringify(version)};`, loader: 'js',
     }));
   },
 }];

@@ -4,6 +4,7 @@ import { defaultPrinterAdapter } from './printers.js';
 import { PrinterService, printerIdSchema, printRequestSchema, markupPrintRequestSchema } from './printing.js';
 import { PrintGoError, messageOf } from './errors.js';
 import { stateDirectory } from './storage.js';
+import { version } from './version.js';
 import type { PrinterAdapter } from './types.js';
 import type { AssetDownloader } from './assets.js';
 
@@ -29,7 +30,7 @@ export function createPrinterMcpServer(options: PrinterMcpServerOptions = {}): M
 
 // HTTP requests share one service so job submission and idempotency remain serialized.
 export function createMcpServer(service: PrinterService): McpServer {
-  const mcp = new McpServer({ name: 'printgo-mcp', version: '0.1.1' }, {
+  const mcp = new McpServer({ name: 'printgo-mcp', version }, {
     supportedProtocolVersions: ['2026-07-28', '2025-11-25', '2025-06-18', '2025-03-26'],
   });
   const safe = async (work: () => Promise<unknown>) => {

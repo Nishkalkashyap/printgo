@@ -10,6 +10,7 @@ import type { DaemonStatus, StartOptions, StartResult, TunnelConfig } from './ho
 import { installBrowser, type BrowserInstallResult } from './browser.js';
 import { servePrinterStdio } from './stdio.js';
 import { commandNames, renderHelp } from './cli-help.js';
+import { version } from './version.js';
 
 // Parse errors must also respect --json.
 let jsonOutput = process.argv.slice(2).includes('--json');
@@ -76,7 +77,7 @@ async function main(): Promise<void> {
     help: { type: 'boolean', short: 'h' }, version: { type: 'boolean', short: 'v' }, json: { type: 'boolean' }, yes: { type: 'boolean', short: 'y' },
   } });
   jsonOutput = Boolean(values.json);
-  if (values.version) { process.stdout.write('0.1.1\n'); return; }
+  if (values.version) { process.stdout.write(`${version}\n`); return; }
   const command = positionals[0];
   if (positionals.length > 1 || (command !== undefined && !commandNames.includes(command))) {
     throw new PrintGoError('INVALID_COMMAND', 'Use stdio, start, stop, status, restart, or install-browser. See --help.');
