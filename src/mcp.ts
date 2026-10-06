@@ -29,7 +29,7 @@ export function createPrinterMcpServer(options: PrinterMcpServerOptions = {}): M
 
 // HTTP requests share one service so job submission and idempotency remain serialized.
 export function createMcpServer(service: PrinterService): McpServer {
-  const mcp = new McpServer({ name: 'printgo-mcp', version: '0.1.0' }, {
+  const mcp = new McpServer({ name: 'printgo-mcp', version: '0.1.1' }, {
     supportedProtocolVersions: ['2026-07-28', '2025-11-25', '2025-06-18', '2025-03-26'],
   });
   const safe = async (work: () => Promise<unknown>) => {

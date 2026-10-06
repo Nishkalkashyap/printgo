@@ -76,7 +76,7 @@ async function main(): Promise<void> {
     help: { type: 'boolean', short: 'h' }, version: { type: 'boolean', short: 'v' }, json: { type: 'boolean' }, yes: { type: 'boolean', short: 'y' },
   } });
   jsonOutput = Boolean(values.json);
-  if (values.version) { process.stdout.write('0.1.0\n'); return; }
+  if (values.version) { process.stdout.write('0.1.1\n'); return; }
   const command = positionals[0];
   if (positionals.length > 1 || (command !== undefined && !commandNames.includes(command))) {
     throw new PrintGoError('INVALID_COMMAND', 'Use stdio, start, stop, status, restart, or install-browser. See --help.');
